@@ -45,9 +45,6 @@ class TDirTool
         	return MakeFullDir(dirpath.c_str(), cover, mode);
         }
 
-		//MakeFullDir的实现函数，内函递归调用
-		static int _MakeFullDir( const char *dirpath, bool cover = false, int mode = 755 );
-
 		//删除目录，目录必须为空目录才可删除
 		//linux目录下只存在.与..两个隐藏目录才算空目录
 		static int DelDir( const char *dirpath );
@@ -78,9 +75,6 @@ class TDirTool
 		{
         	return CopyDir( srcdirpath.c_str(), dstdirpath.c_str(), cover );
         }
-
-		//CopyDir的实现函数，内涵递归调用
-		static int _CopyDir( const char *srcdirpath, const char *dstdirpath, bool cover = false);
 
 		//重命名目录，源目录与目标目录的上级目录必须一致，即只能在同级目录下改名
 		//第三参数为目标目录存在时是否覆盖目标目录或同名文件，默认为不覆盖
@@ -216,6 +210,14 @@ class TDirTool
 		{
 			return GetDirMTime(res, dirpath.c_str());
 		}
+
+	private:
+	
+		//MakeFullDir的实现函数，内函递归调用
+		static int _MakeFullDir( const char *dirpath, bool cover = false, int mode = 755 );
+	
+		//CopyDir的实现函数，内涵递归调用
+		static int _CopyDir( const char *srcdirpath, const char *dstdirpath, bool cover = false);
 };
 
 #endif

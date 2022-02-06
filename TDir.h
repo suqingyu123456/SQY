@@ -66,24 +66,15 @@ class TDir
 		//该方法若设置匹配模式会有歧义，因此不能设置匹配模式
 		int ListFull( vector<string> &res, bool display = false);
 
-		//ListFull实现方法，内含递归调用
-		int _ListFull( vector<string> &res, bool display = false);
-
 		//列出目录下所有文件，不包括目录，包括子目录下的次级文件
 		//第二参数为是否显示隐藏文件，默认不显示
 		//第三参数为正则表达式的匹配模式，默认为空
 		int ListFullFile( vector<string> &res, bool display = false, const string pattern = "" );
 
-		//ListFullFile实现方法，内含递归调用
-		int _ListFullFile( vector<string> &res, bool display = false, const string pattern = "" );
-
 		//列出目录下所有子目录，不包括文件，包括子目录下的次级目录
 		//第二参数为是否显示隐藏文件，默认不显示
 		//第三参数为正则表达式的匹配模式，默认为空
 		int ListFullDir( vector<string> &res, bool display = false, const string pattern = "" );
-
-		//ListFullDir实现方法，内含递归调用
-		int _ListFullDir( vector<string> &res, bool display = false, const string pattern = "" );
 
 		//获取目录路径
 		string GetDirPath();
@@ -123,6 +114,17 @@ class TDir
 
 		//目录是否可执行
 		bool IsExecuteable();
+
+	private:
+		
+		//ListFullDir实现方法，内含递归调用
+		int _ListFullDir( vector<string> &res, bool display = false, const string pattern = "" );
+
+		//ListFullFile实现方法，内含递归调用
+		int _ListFullFile( vector<string> &res, bool display = false, const string pattern = "" );
+
+		//ListFull实现方法，内含递归调用
+		int _ListFull( vector<string> &res, bool display = false);
 
 	private:
 		string m_DirPath;
