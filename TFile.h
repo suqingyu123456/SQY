@@ -82,18 +82,21 @@ class TFile
 		int ReadB( void *res, long &readsize, long size = -1 );
 		
 		//将字符串写入文件
-		int Write( const char *str );
-		int Write( const string &str )
+		//第二参数是否开启缓冲，即数据立即写入文件还是写入缓冲区，默认立即写入
+		int Write( const char *str, bool buffer = false );
+		int Write( const string &str, bool buffer = false )
 		{
-			return Write(str.c_str());
+			return Write(str.c_str(), buffer );
 		}
 
 		//将字符串数组写入文件中
 		//写入过程不会自动换行，若想换行请在数组中字符串末尾加入换行符
-		int WriteLines( vector<string> &strs);
+		//第二参数是否开启缓冲，即数据立即写入文件还是写入缓冲区，默认立即写入
+		int WriteLines( vector<string> &strs, bool buffer = false );
 
 		//将二进制数据写入文件,必须指定写入字节大小,若为负数返回失败
-		int WriteB( void *data, long size );
+		//第二参数是否开启缓冲，即数据立即写入文件还是写入缓冲区，默认立即写入
+		int WriteB( void *data, long size, bool buffer = false );
 
 		//移动文件读取指针到指定位置
 		//offset为开始的偏移量，也就是代表需要移动偏移的字节数。
@@ -150,7 +153,6 @@ class TFile
 		FILE *m_FilePoint;  //文件指针
 		string m_FilePath;  //文件路径
 		string m_FileOpenMode;  //文件打开模式
-		
 };
 
 #endif

@@ -312,7 +312,7 @@ int TFile::ReadB( void *res, long &readsize, long size )
 
 
 ////将字符串写入文件
-int TFile::Write( const char *str )
+int TFile::Write( const char *str, bool buffer )
 {
 	if ( m_FilePoint == NULL )  //文件未打开
 	{
@@ -329,14 +329,19 @@ int TFile::Write( const char *str )
 	{
 		return FAIL;
 	}
-	Flush();
+
+	//是否开启缓冲
+	if ( buffer == false )
+	{
+		Flush();
+	}
 	
 	return SUCCESS;
 }
 
 //将字符串数组写入文件中
 //写入过程不会自动换行，若想换行请在数组中字符串末尾加入换行符
-int TFile::WriteLines( vector<string> &strs)
+int TFile::WriteLines( vector<string> &strs, bool buffer )
 {
 	if ( m_FilePoint == NULL )  //文件未打开
 	{
@@ -356,13 +361,18 @@ int TFile::WriteLines( vector<string> &strs)
 			return FAIL;
 		}
 	}
-	Flush();
+	
+	//是否开启缓冲
+	if ( buffer == false )
+	{
+		Flush();
+	}
 
 	return SUCCESS;
 }
 
 //将二进制数据写入文件,必须指定写入字节大小,若为负数返回失败
-int TFile::WriteB( void *data, long size )
+int TFile::WriteB( void *data, long size, bool buffer )
 {
 	if ( m_FilePoint == NULL )  //文件未打开
 	{
@@ -388,7 +398,12 @@ int TFile::WriteB( void *data, long size )
 	{
 		return FAIL;
 	}
-	Flush();
+	
+	//是否开启缓冲
+	if ( buffer == false )
+	{
+		Flush();
+	}
 	
 	return SUCCESS;
 }
