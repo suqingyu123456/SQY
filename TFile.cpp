@@ -24,11 +24,18 @@ TFile::TFile( const TFile &other )
 }
 
 
-TFile::TFile( const string other )
+TFile::TFile( const string &other )
 : m_FilePoint(NULL), m_FilePath(other), m_FileOpenMode("")
 {
 	;
 }
+
+TFile::TFile( const char *other )
+: m_FilePoint(NULL), m_FilePath(other), m_FileOpenMode("")
+{
+	;
+}
+
 
 TFile & TFile::operator=( const TFile &other )
 {
@@ -37,12 +44,20 @@ TFile & TFile::operator=( const TFile &other )
 	return *this;
 }
 
-TFile & TFile::operator=( const string other )
+TFile & TFile::operator=( const string &other )
 {
 	Close();
 	m_FilePath = other;
 	return *this;
 }
+
+TFile & TFile::operator=( const char *other )
+{
+	Close();
+	m_FilePath = other;
+	return *this;
+}
+
 
 //以mode参数打开文件，mode参数类型与fopen一致，可百度查询
 int TFile::Open( const char *mode )

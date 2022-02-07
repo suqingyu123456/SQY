@@ -31,11 +31,15 @@ class TFile
 
 		TFile( const TFile &other );
 
-		TFile( const string other );
+		TFile( const string &other );
+
+		TFile( const char *other );
 
 		TFile & operator=( const TFile &other );
 
-		TFile & operator=( const string other );
+		TFile & operator=( const string &other );
+
+		TFile & operator=( const char *other );
 
 	public:  //实现方法
 
