@@ -97,7 +97,7 @@ int TXMLTool::GetXMLValue( long &res, const char *xml, const char *field )
 		return id;
 	}
 
-	res = atol(value.c_str());  //调用atoi函数
+	res = atol(value.c_str());  //调用atol函数
 
 	return SUCCESS;
 }
@@ -112,7 +112,7 @@ int TXMLTool::GetXMLValue( unsigned long &res, const char *xml, const char *fiel
 		return id;
 	}
 
-	res = (unsigned long)atol(value.c_str());  //调用atoi函数
+	res = (unsigned long)atol(value.c_str());  //调用atol函数
 
 	return SUCCESS;
 }
@@ -128,7 +128,7 @@ int TXMLTool::GetXMLValue( double &res, const char *xml, const char *field )
 		return id;
 	}
 
-	res = atof(value.c_str());  //调用atoi函数
+	res = atof(value.c_str());  //调用atof函数
 
 	return SUCCESS;
 }
