@@ -10,6 +10,7 @@
 #include "TDirTool.h"
 #include "TLog.h"
 #include "TXMLTool.h"
+#include "TINI.h"
 using namespace std;
 
 
