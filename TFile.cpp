@@ -218,6 +218,11 @@ int TFile::Read( string &res, long size )
 		size -= strlen(str);
 	}
 
+	if ( res.empty() == true )
+	{
+		return FAIL;
+	}
+
 	return SUCCESS;
 	
 }
@@ -248,6 +253,11 @@ int TFile::ReadLine( string &res, long size )
 	//使用库函数fgets读取一行字符串
 	fgets(str, MAXSIZE, m_FilePoint); //fgets较特殊，不判断是否成功，以res字符串判断读取成功
 	res = str;
+
+	if ( res.empty() == true )  //读取字符串失败，返回错误
+	{
+		return FAIL;
+	}
 	
 	return SUCCESS;
 }
