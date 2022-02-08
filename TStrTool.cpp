@@ -352,6 +352,72 @@ int TStrTool::CutStr( StrPair &res, const char *str, const char *cutstr, int cut
 	return SUCCESS;
 }
 
+//按正则表达式规则匹配字符串，完全匹配返回true，否则返回false
+bool TStrTool::Match( const char *str, const char *pattern )
+{
+	if ( IsEmptyStr(pattern) == true )  //正则表达为空，返回true
+	{
+		return true;
+	}
+	
+	std::regex reg(pattern);  //使用regex
+	return std::regex_match( str, reg );  //调用regex_match函数
+}
 
+//按正则表达式规则搜索字符串，搜索成功返回第一个匹配的字符串，否则返回空对象
+vector<string> TStrTool::SearchFull( const char *str, const char *pattern )
+{
+	vector<string> res;
+	if ( IsEmptyStr(pattern) == true )  //正则表达为空，返回空数组
+	{
+		return res;
+	}
+			
+	std::regex reg(pattern);  //使用regex
+			
+	std::cmatch cma;  //使用cmatch，存放结果
+				
+	while ( regex_search(str, cma, reg) )  //调用regex_search函数
+	{
+		res.push_back(cma[0]);  //循环查找匹配结果，并存入数组
+		str = cma[0].second;
+	}
 
+	return res;
+}
+
+string TStrTool::Search( const char *str, const char *pattern )
+{
+	if ( IsEmptyStr(pattern) == true )  //正则表达为空，返回空字符串
+	{
+		return "";
+	}
+			
+	std::regex reg(pattern);  //使用regex
+			
+	std::cmatch cma;  //使用cmatch，存放结果
+	
+	bool res = regex_search(str, cma, reg);  //调用regex_search函数
+
+	if ( res == true )  //查找成功，返回匹配字符串
+	{
+		return cma[0];
+	}
+
+	return "";
+}
+
+//按正则表达式规则替换字符串，返回替换后的字符串
+string TStrTool::Replace( const char *str, const char *pattern, const char *newstr )
+{
+	if ( IsEmptyStr(pattern) == true )  //正则表达为空，返回空字符串
+	{
+		return "";
+	}
+			
+	std::regex reg(pattern);  //使用regex
+
+	return regex_replace(str, reg, newstr );  //调用regex_replace函数
+			
+}
 

@@ -208,46 +208,85 @@ class TStrTool
         	return CutStr( res, str, cutstr.c_str(), cutindex );
         }
 
-		//C++11已实现正则表达式，这里只是对其regex_match函数简单封装
-		//表达式使用规则请百度regex库
+		//C++11已实现正则表达式(regex)，以下是对regex库的简单封装
+		//表达式使用规则请百度regex库正则表达式规则
 		//C++11表达式功能强大，更多功能请百度
-		static bool Match( const char *str, const char *pattern )
-		{
-			if ( IsEmptyStr(pattern) == true )
-			{
-				return true;
-			}
-			std::regex reg(pattern);
-			return std::regex_match( str, reg );
-		}
+		
+		//按正则表达式规则匹配字符串，完全匹配返回true，否则返回false
+		static bool Match( const char *str, const char *pattern );
 		static bool Match( const string &str, const char *pattern )
 		{
-			if ( IsEmptyStr(pattern) == true )
-			{
-				return true;
-			}
-			std::regex reg(pattern);
-			return std::regex_match( str, reg );
+			return Match(str.c_str(), pattern);
 		}
 		static bool Match( const char *str, const string &pattern )
 		{
-			if ( pattern.empty() == true )
-			{
-				return true;
-			}
-			std::regex reg(pattern);
-			return std::regex_match( str, reg );
+			return Match(str, pattern.c_str());
 		}
 		static bool Match( const string &str, const string &pattern )
 		{
-			if ( pattern.empty() == true )
-			{
-				return true;
-			}
-			std::regex reg(pattern);
-			return std::regex_match( str, reg );
+			return Match(str.c_str(), pattern.c_str());
 		}
 
+		//按正则表达式规则搜索字符串，搜索成功返回第一个匹配的字符串，否则返回空对象
+		static string Search( const char *str, const char *pattern );
+		static string Search( const string &str, const char *pattern )
+		{
+			return Search(str.c_str(), pattern);
+		}
+		static string Search( const char *str, const string &pattern )
+		{
+			return Search(str, pattern.c_str());
+		}
+		static string Search( const string &str, const string &pattern )
+		{
+			return Search(str.c_str(), pattern.c_str());
+		}
+
+		//按正则表达式规则搜索字符串，以字符串数组返回所有的匹配成功结果
+		static vector<string> SearchFull( const char *str, const char *pattern );
+		static vector<string> SearchFull( const string &str, const char *pattern )
+		{
+			return SearchFull(str.c_str(), pattern);
+		}
+		static vector<string> SearchFull( const char *str, const string &pattern )
+		{
+			return SearchFull(str, pattern.c_str());
+		}
+		static vector<string> SearchFull( const string &str, const string &pattern )
+		{
+			return SearchFull(str.c_str(), pattern.c_str());
+		}
+
+		//按正则表达式规则替换字符串，返回替换后的字符串
+		static string Replace( const char *str, const char *pattern, const char *newstr );
+		static string Replace( const string &str, const char *pattern, const char *newstr )
+		{
+			return Replace(str.c_str(), pattern, newstr);
+		}
+		static string Replace( const char *str, const string &pattern, const char *newstr  )
+		{
+			return Replace(str, pattern.c_str(), newstr);
+		}
+		static string Replace( const char *str, const char *pattern, const string &newstr  )
+		{
+			return Replace(str, pattern, newstr.c_str());
+		}
+		static string Replace( const string &str, const string &pattern, const char *newstr )
+		{
+			return Replace(str.c_str(), pattern.c_str(), newstr);
+		}
+		static string Replace( const string &str, const char *pattern, const string &newstr  )
+		{
+			return Replace(str.c_str(), pattern, newstr.c_str());
+		}
+		static string Replace( const char *str, const string &pattern, const string &newstr  )
+		{
+			return Replace(str, pattern.c_str(), newstr.c_str());
+		}
+		static string Replace( const string &str, const string &pattern, const string &newstr  )
+		{
+			return Replace(str.c_str(), pattern.c_str(), newstr.c_str());
+		}
 };
 
 #endif
