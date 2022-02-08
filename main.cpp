@@ -9,6 +9,7 @@
 #include "TDir.h"
 #include "TDirTool.h"
 #include "TLog.h"
+#include "TXMLTool.h"
 using namespace std;
 
 
